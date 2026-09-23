@@ -40,8 +40,8 @@ jobs:
             gradle: ./gradlew.bat
             task: packageMsi
             extension: msi
-          - platform: macos-x64
-            os: macos-15-intel
+          - platform: macos-arm64
+            os: macos-15
             gradle: bash ./gradlew
             task: packageDmg
             extension: dmg

@@ -31,6 +31,18 @@ HappyFace 是一套为桌面 AI 智能终端设计的参数化表情系统。表
 ./gradlew :shared:desktopTest
 ```
 
+## GitHub 自动打包
+
+向 `main` 推送代码会自动运行 [Package previews](https://github.com/bestyize/HappyFace/actions/workflows/package.yml)，也可以在仓库的 **Actions → Package previews → Run workflow** 手动触发。成功后在该次运行页面底部的 **Artifacts** 下载：
+
+| 产物 | 用途 |
+| --- | --- |
+| `HappyFace-web` | 网页静态文件；解压后部署文件夹内容到静态站点 |
+| `HappyFace-windows-x64` | Windows x64 `.msi` 安装包 |
+| `HappyFace-macos-x64` | Intel Mac `.dmg` 安装包 |
+
+产物保存 14 天。当前为未签名的 P0 预览包，不会自动公开部署或发布 Release；Android / iOS 应用模块尚未建立，因此暂不生成 APK / IPA。网页任务同时运行表情引擎测试。可在对应系统上本地执行 `:desktopApp:packageMsi` 或 `:desktopApp:packageDmg`，以及 `:webApp:wasmJsBrowserDistribution`。首次构建结果以 Actions 运行记录为准。
+
 网页构建依赖 Compose Multiplatform Web Beta 的兼容性。P0 会在 iPhone Safari、Android 浏览器和目标级别的 Android 设备上做技术闸门测试。如浏览器端不达标，可复用 `ExpressionEngine` 并单独替换网页绘制层。
 
 ## 当前交互

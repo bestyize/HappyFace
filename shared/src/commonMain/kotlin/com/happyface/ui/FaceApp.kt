@@ -59,8 +59,8 @@ fun FaceApp() {
             val x = center.x + frame.gazeX.toFloat() * unit * 0.035f
             val y = center.y + unit * 0.55f + drift
             moveTo(x - unit * 0.18f, y)
-            quadraticBezierTo(x - unit * 0.10f, y + unit * (0.08f + frame.smile.toFloat() * 0.11f), x, y)
-            quadraticBezierTo(x + unit * 0.10f, y + unit * (0.08f + frame.smile.toFloat() * 0.11f), x + unit * 0.18f, y)
+            quadraticTo(x - unit * 0.10f, y + unit * (0.08f + frame.smile.toFloat() * 0.11f), x, y)
+            quadraticTo(x + unit * 0.10f, y + unit * (0.08f + frame.smile.toFloat() * 0.11f), x + unit * 0.18f, y)
         }
         drawPath(mouth, Color(0xFFF6FAFF), style = Stroke(width = stroke * 0.62f, cap = StrokeCap.Round))
     }

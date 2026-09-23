@@ -41,6 +41,14 @@ HappyFace 是一套为桌面 AI 智能终端设计的参数化表情系统。表
 | `HappyFace-windows-x64` | Windows x64 `.msi` 安装包 |
 | `HappyFace-macos-arm64` | Apple Silicon Mac `.dmg` 安装包 |
 
+本地体验网页包：下载并解压 `HappyFace-web`，进入包含 `index.html` 的目录，启动静态文件服务：
+
+```bash
+python3 -m http.server 8000 --bind 127.0.0.1
+```
+
+然后在浏览器打开 <http://localhost:8000/>。不要直接用 `file://` 打开 `index.html`；网页包中的 Wasm 资源需要通过 HTTP 加载。请使用支持 WasmGC 的现代浏览器。
+
 产物保存 14 天。当前为未签名的 P0 预览包，不会自动公开部署或发布 Release；Android / iOS 应用模块尚未建立，因此暂不生成 APK / IPA。网页任务同时运行表情引擎测试。可在对应系统上本地执行 `:desktopApp:packageMsi` 或 `:desktopApp:packageDmg`，以及 `:webApp:wasmJsBrowserDistribution`。首次构建结果以 Actions 运行记录为准。
 
 网页构建依赖 Compose Multiplatform Web Beta 的兼容性。P0 会在 iPhone Safari、Android 浏览器和目标级别的 Android 设备上做技术闸门测试。如浏览器端不达标，可复用 `ExpressionEngine` 并单独替换网页绘制层。

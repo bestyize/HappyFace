@@ -60,6 +60,20 @@ jobs:
         run: Add-Content -Path $env:GITHUB_PATH -Value 'C:\Program Files (x86)\WiX Toolset v3.14\bin'
       - name: Package desktop preview
         run: ${{ matrix.gradle }} :desktopApp:${{ matrix.task }} --no-daemon
+      - name: Show macOS jpackage diagnostics
+        if: failure() && matrix.platform == 'macos-arm64'
+        shell: bash
+        run: |
+          if [ -d desktopApp/build/compose/logs ]; then
+            find desktopApp/build/compose/logs -type f \( -name '*-err.txt' -o -name '*-out.txt' \) -print -exec cat {} \;
+          fi
+      - uses: actions/upload-artifact@v4
+        if: failure() && matrix.platform == 'macos-arm64'
+        with:
+          name: HappyFace-macos-jpackage-logs
+          path: desktopApp/build/compose/logs/
+          if-no-files-found: warn
+          retention-days: 7
       - uses: actions/upload-artifact@v4
         with:
           name: HappyFace-${{ matrix.platform }}

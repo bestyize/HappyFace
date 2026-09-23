@@ -104,7 +104,7 @@ class ExpressionEngine(seed: Int = 1) {
         elapsed += dt
         val expired = active.filterValues { it.expiresAt <= elapsed }.keys.toList()
         expired.forEach { active.remove(it) }
-        val selected = active.maxByOrNull { it.key.priority }?.value?.intent
+        val selected = active.entries.maxByOrNull { it.key.priority }?.value?.intent
         val intent = selected ?: ExpressionIntent()
         val amount = if (selected == null || intent.mood == Mood.CALM) 0.0 else intent.intensity
 

@@ -6,7 +6,11 @@ plugins {
 
 kotlin {
     wasmJs {
-        browser()
+        browser {
+            commonWebpackConfig {
+                outputFileName = "webApp.js"
+            }
+        }
         binaries.executable()
     }
 
@@ -19,4 +23,3 @@ kotlin {
         }
     }
 }
-

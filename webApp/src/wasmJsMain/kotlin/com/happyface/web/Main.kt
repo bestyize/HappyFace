@@ -1,12 +1,12 @@
 package com.happyface.web
 
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.window.ComposeViewport
 import com.happyface.ui.FaceApp
-import kotlinx.browser.document
-import org.jetbrains.compose.ui.window.ComposeViewport
 
+@OptIn(ExperimentalComposeUiApi::class)
 fun main() {
-    ComposeViewport(document.getElementById("root")!!) {
+    ComposeViewport(viewportContainerId = "root") {
         FaceApp()
     }
 }
-

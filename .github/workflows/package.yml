@@ -22,6 +22,16 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
       - name: Test expression engine and package web preview
         run: bash ./gradlew :shared:desktopTest :webApp:wasmJsBrowserDistribution --no-daemon
+      - name: Verify web entry point
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          output = Path('webApp/build/dist/wasmJs/productionExecutable')
+          html = (output / 'index.html').read_text(encoding='utf-8')
+          assert 'src="webApp.js"' in html, 'index.html does not load webApp.js'
+          assert (output / 'webApp.js').is_file(), 'webApp.js is missing from the distribution'
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: HappyFace-web

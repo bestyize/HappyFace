@@ -38,7 +38,10 @@ fun FaceApp() {
     Canvas(
         Modifier.fillMaxSize().pointerInput(engine) {
             detectTapGestures { point ->
-                engine.tap(point.x / size.width, point.y / size.height)
+                engine.tap(
+                    (point.x / size.width).toDouble(),
+                    (point.y / size.height).toDouble(),
+                )
             }
         },
     ) {
@@ -80,4 +83,3 @@ private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawEye(
         )
     }
 }
-

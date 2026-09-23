@@ -41,7 +41,7 @@ jobs:
             task: packageMsi
             extension: msi
           - platform: macos-x64
-            os: macos-14
+            os: macos-15-intel
             gradle: bash ./gradlew
             task: packageDmg
             extension: dmg

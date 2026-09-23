@@ -17,7 +17,7 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Msi, TargetFormat.Dmg)
             packageName = "HappyFace"
-            packageVersion = "0.1.0"
+            packageVersion = "1.0.0"
             description = "HappyFace expression preview"
         }
     }

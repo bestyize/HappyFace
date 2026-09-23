@@ -1,0 +1,27 @@
+name: Expression core CI
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'shared/**'
+      - 'docs/EXPRESSION_CONTRACT.md'
+      - '.github/workflows/expression-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  expression-core:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Test shared animation engine and compile web target
+        run: bash ./gradlew :shared:desktopTest :webApp:compileKotlinWasmJs --no-daemon

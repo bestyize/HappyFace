@@ -46,12 +46,14 @@ fun FaceApp() {
         },
     ) {
         drawRect(Color(0xFF080B12))
-        val unit = min(size.width / 5f, size.height / 3f)
+        // Match the full-screen face proportions used by the web preview.
+        // The width constraint leaves room for the widest eye and its stroke.
+        val unit = min(size.width / 4.25f, size.height / 2.55f)
         val center = Offset(size.width / 2f, size.height / 2f)
         val drift = frame.breath.toFloat() * unit
-        val spacing = unit * 0.77f
+        val spacing = unit * 1.18f
         val eyeY = center.y - unit * 0.22f + drift + frame.gazeY.toFloat() * unit * 0.08f
-        val stroke = (unit * 0.08f).coerceAtLeast(2f)
+        val stroke = (unit * 0.105f).coerceAtLeast(2f)
         drawEye(center.x - spacing, eyeY, unit, stroke, frame)
         drawEye(center.x + spacing, eyeY, unit, stroke, frame)
 
@@ -70,7 +72,7 @@ private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawEye(
     centerX: Float, centerY: Float, unit: Float, stroke: Float, frame: FaceFrame,
 ) {
     val center = Offset(centerX + frame.gazeX.toFloat() * unit * 0.10f, centerY)
-    val radius = unit * 0.35f * frame.eyeRoundness.toFloat()
+    val radius = unit * 0.50f * frame.eyeRoundness.toFloat()
     val openness = frame.eyeOpen.toFloat().coerceIn(0.04f, 1f)
     if (openness < 0.18f) {
         drawLine(Color(0xFFBCEBFF), Offset(center.x - radius, center.y), Offset(center.x + radius, center.y), stroke, cap = StrokeCap.Round)
